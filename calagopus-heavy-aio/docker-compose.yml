@@ -36,7 +36,7 @@ services:
       - ${APP_DATA_DIR}/data/wings-tmp:/tmp/calagopus-wings
 
   web:
-    image: ghcr.io/calagopus/panel:1.1.5-heavy-aio@sha256:373b7868ce7d42325a6af4662bc74dd1efae39d9a4760c72d00071e69d8afa91
+    image: ghcr.io/calagopus/panel:1.2.2-heavy-aio@sha256:c5fe8f0ccd0dbb72840b5229c57003d72216dc10c755d76c0a0b8039629aa5e8
     restart: on-failure
     # The heavy supervisor needs longer than Docker's 10s default to hand off
     # and stop the panel cleanly.

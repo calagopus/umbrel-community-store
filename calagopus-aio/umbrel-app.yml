@@ -2,7 +2,7 @@ manifestVersion: 1
 id: calagopus-aio
 category: developer
 name: Calagopus AIO
-version: "1.1.5"
+version: "1.2.2"
 tagline: A modern game server management panel built in Rust. Deploy, monitor,
   and manage Minecraft, Hytale, and other game servers with industry-leading performance.
 description: >-
@@ -39,7 +39,24 @@ description: >-
 
   - The panel opens a host port for each game server you create. Watch for port
   conflicts with other Umbrel apps and with umbrelOS.
-releaseNotes: ""
+releaseNotes: |-
+  Added:
+  - Added support for shared file upload state
+  - Added support for importing avatars from oauth providers
+  - Added the ability to hide addresses in the panel
+  - Added support for disabling activity ip viewing for certain groups
+  - Added new empty table design with a CTA
+  - Added support for mass-statting paths
+  - Added file upload conflict warnings
+  - Added ability to fully disable password logins
+  - Added missing backup deletion/force deletion switch on mass-admin-server-actions
+
+  Fixed:
+  - Fixed some possible performance issues
+  - Fixed breakpoints in virtual windows not working properly
+  - Fixed self-reporting memory usage including non-RSS usage
+  …
+  Full notes: https://github.com/calagopus/panel/releases/tag/release-1.2.2
 developer: Calagopus
 website: https://calagopus.com
 dependencies: []
