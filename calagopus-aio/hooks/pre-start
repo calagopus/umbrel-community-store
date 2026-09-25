@@ -1,0 +1,30 @@
+#!/usr/bin/env bash
+set -euo pipefail
+
+APP_DIR="${APP_DATA_DIR:-$(readlink -f "$(dirname "${BASH_SOURCE[0]}")/..")}"
+DATA_DIR="${APP_DIR}/data"
+DOCKER_DIR="${DATA_DIR}/docker"
+
+# Remove stale Docker-in-Docker runtime state that can survive power loss,
+# crashes, restarts, or updates and stop the nested Docker daemon from starting.
+# Keep ${DOCKER_DIR}/data intact: it is the nested Docker graph root and holds
+# pulled game server images.
+rm -f "${DOCKER_DIR}/docker.pid"
+rm -f "${DOCKER_DIR}/docker.sock"
+rm -rf "${DOCKER_DIR}/exec"
+
+# Make sure every bind-mount source directory exists before the containers start,
+# including on installs that predate a newly added mount.
+mkdir -p \
+  "${DOCKER_DIR}" \
+  "${DATA_DIR}/postgres" \
+  "${DATA_DIR}/cache" \
+  "${DATA_DIR}/panel" \
+  "${DATA_DIR}/logs" \
+  "${DATA_DIR}/wings" \
+  "${DATA_DIR}/wings-etc" \
+  "${DATA_DIR}/wings-logs" \
+  "${DATA_DIR}/wings-tmp"
+
+# The AIO container expects this file to exist; it fills it in on first start.
+[ -e "${DATA_DIR}/wings-config.yml" ] || touch "${DATA_DIR}/wings-config.yml"

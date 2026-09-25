@@ -1,0 +1,54 @@
+manifestVersion: 1
+id: calagopus-aio
+category: developer
+name: Calagopus AIO
+version: "1.1.5"
+tagline: A modern game server management panel built in Rust. Deploy, monitor,
+  and manage Minecraft, Hytale, and other game servers with industry-leading performance.
+description: >-
+  Calagopus is a modern, open-source game server
+  management panel built with Rust and React. It provides a fast, secure
+  interface for deploying, monitoring, and maintaining game servers
+  - built for everyone from solo homelabbers to large hosting operators.
+
+
+  It draws inspiration from Pterodactyl but is written from scratch in Rust,
+  with a focus on performance, security, and extensibility. The panel includes
+  a rich extension API and welcomes community contributions.
+
+
+  This is the all-in-one (AIO) package: it bundles the Calagopus panel and a
+  Wings node daemon together, so you can create and run game servers on your
+  Umbrel without setting up a separate node.
+
+
+  First run: open the app and complete the setup wizard (OOBE) to create your
+  administrator account and finish configuration. An integrated location and
+  node are created automatically for local game servers.
+
+
+  Notes:
+
+
+  - The panel database, game server files, and local backups are stored under
+  the app's data directory and are included in Umbrel backups.
+
+
+  - SFTP access to game server files is published on host port 2022.
+
+
+  - The panel opens a host port for each game server you create. Watch for port
+  conflicts with other Umbrel apps and with umbrelOS.
+releaseNotes: ""
+developer: Calagopus
+website: https://calagopus.com
+dependencies: []
+repo: https://github.com/calagopus/panel
+support: https://discord.gg/uSM8tvTxBV
+port: 25400
+gallery: []
+path: ""
+defaultUsername: ""
+defaultPassword: ""
+submitter: Jelcoo
+submission: https://github.com/Jelcoo/umbrel-apps/pull/1
