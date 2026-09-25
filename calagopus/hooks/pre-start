@@ -1,0 +1,11 @@
+#!/usr/bin/env bash
+set -euo pipefail
+
+APP_DIR="${APP_DATA_DIR:-$(readlink -f "$(dirname "${BASH_SOURCE[0]}")/..")}"
+DATA_DIR="${APP_DIR}/data"
+
+mkdir -p \
+  "${DATA_DIR}/postgres" \
+  "${DATA_DIR}/cache" \
+  "${DATA_DIR}/panel" \
+  "${DATA_DIR}/logs"

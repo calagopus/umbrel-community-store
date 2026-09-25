@@ -18,7 +18,7 @@ services:
     environment:
       TZ: Europe/Berlin
       REDIS_URL: redis://cache
-      DATABASE_URL: postgresql://panel:${APP_CALAGOPUS_PANEL_HEAVY_AIO_DB_PASSWORD}@db/panel
+      DATABASE_URL: postgresql://panel:panel@db/panel
       DATABASE_MIGRATE: "true"
       PORT: "8000"
       DOCKER_HOST: unix:///var/run/docker.sock
@@ -59,7 +59,7 @@ services:
     environment:
       TZ: Europe/Berlin
       POSTGRES_USER: panel
-      POSTGRES_PASSWORD: ${APP_CALAGOPUS_PANEL_HEAVY_AIO_DB_PASSWORD}
+      POSTGRES_PASSWORD: panel
       POSTGRES_DB: panel
       PGDATA: /data
     healthcheck:

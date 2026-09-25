@@ -1,7 +1,7 @@
 manifestVersion: 1
-id: calagopus-heavy-aio
+id: calagopus
 category: developer
-name: Calagopus Heavy AIO
+name: Calagopus
 version: "1.2.2"
 tagline: A modern game server management panel built in Rust. Deploy, monitor,
   and manage Minecraft, Hytale, and other game servers with industry-leading performance.
@@ -19,7 +19,7 @@ description: >-
 
   Calagopus Heavy AIO: everything in AIO, plus the toolchain needed to compile backend extensions on the device. Applying extensions triggers a local Rust build that can take several minutes and significant CPU, memory, and disk, so only pick this if you need backend extensions.
 
-  You are viewing: Calagopus Heavy AIO.
+  You are viewing: Calagopus (panel only).
 releaseNotes: |-
   Added:
   - Added support for shared file upload state

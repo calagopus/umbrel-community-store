@@ -3,11 +3,11 @@ version: "3.7"
 services:
   app_proxy:
     environment:
-      APP_HOST: calagopus-aio_web_1
+      APP_HOST: calagopus_web_1
       APP_PORT: 8000
 
   web:
-    image: ghcr.io/calagopus/panel:1.2.2-aio@sha256:da4fb59be235454639c8839a26407d01e72f06b84ae79c23cb282a8ccb49a680
+    image: ghcr.io/calagopus/panel:1.2.2@sha256:ea0ccf8672ea516830c5a24b58f4c427c57ff8815486e6f4cc336478d1fd5005
     restart: on-failure
     stop_grace_period: 1m
     depends_on:
@@ -22,7 +22,6 @@ services:
       DATABASE_MIGRATE: "true"
       PORT: "8000"
       DOCKER_HOST: unix:///var/run/docker.sock
-      AIO_BASE_WINGS_CONFIGURATION: /wings-config.yml
       APP_DEBUG: "false"
       APP_LOG_DIRECTORY: /var/log/calagopus
       APP_PRIMARY: "true"
@@ -35,14 +34,6 @@ services:
       # --- panel
       - ${APP_DATA_DIR}/data/panel:/var/lib/calagopus
       - ${APP_DATA_DIR}/data/logs:/var/log/calagopus
-
-      # --- wings
-      - ${APP_DATA_DIR}/data/wings-config.yml:/wings-config.yml
-      - /var/run/docker.sock:/var/run/docker.sock
-      - ${APP_DATA_DIR}/data/wings-etc:/etc/calagopus-wings
-      - ${APP_DATA_DIR}/data/wings-logs:/var/log/calagopus-wings
-      - ${APP_DATA_DIR}/data/wings:/var/lib/calagopus-wings
-      - ${APP_DATA_DIR}/data/wings-tmp:/tmp/calagopus-wings
     ports:
       - "8000:8000"
       - "2022:2022"
