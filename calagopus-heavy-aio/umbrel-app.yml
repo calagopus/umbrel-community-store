@@ -5,45 +5,15 @@ name: Calagopus Heavy AIO
 version: "1.2.2"
 tagline: A modern game server management panel built in Rust. Deploy, monitor,
   and manage Minecraft, Hytale, and other game servers with industry-leading performance.
+icon: https://calagopus.com/logos/icon.svg
 description: >-
-  Calagopus is a modern, open-source game server
-  management panel built with Rust and React. It provides a fast, secure
-  interface for deploying, monitoring, and maintaining game servers
-  - built for everyone from solo homelabbers to large hosting operators.
+  Calagopus is a modern, open-source game server management panel built with Rust and React. It provides a fast,
+  secure interface for deploying, monitoring, and maintaining game servers - built for everyone from solo homelabbers
+  to large hosting operators.
 
+  It draws inspiration from Pterodactyl but is written from scratch in Rust, with a focus on performance, security,
+  and extensibility. The panel includes a rich extension API and welcomes community contributions.
 
-  It draws inspiration from Pterodactyl but is written from scratch in Rust,
-  with a focus on performance, security, and extensibility. The panel includes
-  a rich extension API and welcomes community contributions.
-
-
-  This is the heavy all-in-one (Heavy AIO) package: it bundles the Calagopus
-  panel and a Wings node daemon together, and adds the toolchain that compiles
-  backend extensions on the device. Pick this variant only if you need backend
-  extensions; otherwise install Calagopus AIO, which is lighter.
-
-
-  First run: open the app and complete the setup wizard (OOBE) to create your
-  administrator account and finish configuration. An integrated location and
-  node are created automatically for local game servers.
-
-
-  Notes:
-
-
-  - Applying extensions triggers a local Rust build and can take
-  several minutes and significant CPU, memory, and disk.
-
-
-  - The panel database, game server files, local backups, and built extensions
-  are stored under the app's data directory and are included in Umbrel backups.
-
-
-  - SFTP access to game server files is published on host port 2023.
-
-
-  - The panel opens a host port for each game server you create. Watch for port
-  conflicts with other Umbrel apps and with umbrelOS.
 releaseNotes: |-
   Added:
   - Added support for shared file upload state

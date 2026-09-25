@@ -6,48 +6,15 @@ services:
       APP_HOST: calagopus-heavy-aio_web_1
       APP_PORT: 8000
 
-  docker:
-    image: docker:28.5.1-dind@sha256:ea9d20492ca1caaaba78e68453433895d256173c79281756e88b745647fcbcfd
-    privileged: true
-    network_mode: host
-    stop_grace_period: 1m
-    restart: on-failure
-    environment:
-      DOCKER_ENSURE_BRIDGE: "dind0:10.32.0.1/16"
-    entrypoint: /entrypoint.sh
-    command: >
-      dockerd
-      --bridge dind0
-      --data-root /data/data
-      --exec-root /data/exec
-      --host unix:///data/docker.sock
-      --pidfile /data/docker.pid
-    healthcheck:
-      test: ["CMD-SHELL", "docker -H unix:///data/docker.sock info >/dev/null 2>&1 || exit 1"]
-      interval: 5s
-      timeout: 5s
-      retries: 30
-    volumes:
-      - ${APP_DATA_DIR}/entrypoint.sh:/entrypoint.sh
-      - ${APP_DATA_DIR}/data/docker:/data
-      # Wings passes these host paths to the nested engine when it starts game
-      # server containers, so they must resolve to the same directories here.
-      - ${APP_DATA_DIR}/data/wings:/var/lib/calagopus-wings
-      - ${APP_DATA_DIR}/data/wings-tmp:/tmp/calagopus-wings
-
   web:
     image: ghcr.io/calagopus/panel:1.2.2-heavy-aio@sha256:c5fe8f0ccd0dbb72840b5229c57003d72216dc10c755d76c0a0b8039629aa5e8
     restart: on-failure
-    # The heavy supervisor needs longer than Docker's 10s default to hand off
-    # and stop the panel cleanly.
     stop_grace_period: 1m
     depends_on:
       db:
         condition: service_healthy
       cache:
         condition: service_started
-      docker:
-        condition: service_healthy
     environment:
       TZ: Europe/Berlin
       REDIS_URL: redis://cache
@@ -58,35 +25,33 @@ services:
       AIO_BASE_WINGS_CONFIGURATION: /wings-config.yml
       APP_DEBUG: "false"
       APP_LOG_DIRECTORY: /var/log/calagopus
-      # This instance runs the panel's background tasks (it is the only one).
       APP_PRIMARY: "true"
-      # Proxy user traffic to the integrated node through the panel; keeps the
-      # home-network setup simple with a single published web port.
       APP_ENABLE_WINGS_PROXY: "true"
       APP_ENCRYPTION_KEY: ${APP_SEED}
       APP_TRUSTED_PROXIES: ${NETWORK_IP}/16
       APP_USE_DECRYPTION_CACHE: "true"
       APP_USE_INTERNAL_CACHE: "true"
     volumes:
+      # --- panel
       - ${APP_DATA_DIR}/data/panel:/var/lib/calagopus
       - ${APP_DATA_DIR}/data/logs:/var/log/calagopus
-      - ${APP_DATA_DIR}/data/wings-config.yml:/wings-config.yml
-      - ${APP_DATA_DIR}/data/wings-etc:/etc/calagopus-wings
-      - ${APP_DATA_DIR}/data/wings-logs:/var/log/calagopus-wings
-      - ${APP_DATA_DIR}/data/wings:/var/lib/calagopus-wings
-      - ${APP_DATA_DIR}/data/wings-tmp:/tmp/calagopus-wings
-      - ${APP_DATA_DIR}/data/docker:/var/run
-      # Backend extension state. The heavy supervisor refuses to start unless
-      # these are present as directories.
+
+      # --- extensions
       - ${APP_DATA_DIR}/data/build/binaries:/app/binaries
       - ${APP_DATA_DIR}/data/build/translations:/app/translations
       - ${APP_DATA_DIR}/data/build/extensions:/app/extensions
       - ${APP_DATA_DIR}/data/build/extension-migrations:/app/repo/database/extension-migrations
+
+      # --- wings
+      - ${APP_DATA_DIR}/data/wings-config.yml:/wings-config.yml
+      - /var/run/docker.sock:/var/run/docker.sock
+      - ${APP_DATA_DIR}/data/wings-etc:/etc/calagopus-wings
+      - ${APP_DATA_DIR}/data/wings-logs:/var/log/calagopus-wings
+      - ${APP_DATA_DIR}/data/wings:/var/lib/calagopus-wings
+      - ${APP_DATA_DIR}/data/wings-tmp:/tmp/calagopus-wings
     ports:
-      # SFTP endpoint for the integrated Wings node; SSH-based, cannot use the
-      # HTTP app proxy. Published on 2023 so it can coexist with Calagopus Panel
-      # AIO in the App Store port space.
-      - "2023:2022"
+      - "8000:8000"
+      - "2022:2022"
 
   db:
     image: ghcr.io/calagopus/pgautoupgrade:18.4-alpine@sha256:65a9f085cd81a93b7f38bc49651d0a6c7183e36984dcee9b1a3c5ddf3c1e319c
