@@ -1,0 +1,97 @@
+name: Update Calagopus Panel
+
+on:
+  schedule:
+    - cron: "0 * * * *"
+  workflow_dispatch:
+
+permissions:
+  contents: write
+  pull-requests: write
+
+concurrency:
+  group: update-panel
+  cancel-in-progress: false
+
+jobs:
+  update:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v7
+
+      - name: Resolve target release
+        id: release
+        env:
+          GH_TOKEN: ${{ github.token }}
+          INPUT_VERSION: ${{ inputs.version }}
+        run: |
+          tag=$(gh api repos/calagopus/panel/releases/latest --jq .tag_name)
+
+          version="${tag#release-}"
+          [[ "$version" =~ ^[0-9]+(\.[0-9]+)*$ ]] || { echo "Unexpected release tag: $tag" >&2; exit 1; }
+          gh api "repos/calagopus/panel/releases/tags/$tag" --jq '.body // ""' > "$RUNNER_TEMP/notes.md"
+          echo "version=$version" >> "$GITHUB_OUTPUT"
+
+      - name: Skip if not newer than the current version
+        id: check
+        env:
+          NEW: ${{ steps.release.outputs.version }}
+        run: |
+          current=$(sed -nE 's/^version: "?([^"]+)"?$/\1/p' calagopus-aio/umbrel-app.yml)
+          echo "current=$current new=$NEW"
+          # Manual runs may deliberately pin any version; scheduled runs only move forward.
+          if [ "${{ github.event_name }}" = "schedule" ] && [ "$(printf '%s\n%s\n' "$current" "$NEW" | sort -V | tail -n1)" != "$NEW" ]; then
+            echo "needed=false" >> "$GITHUB_OUTPUT"
+          elif [ "$current" = "$NEW" ]; then
+            echo "needed=false" >> "$GITHUB_OUTPUT"
+          else
+            echo "needed=true" >> "$GITHUB_OUTPUT"
+          fi
+
+      - name: Skip if an update branch already exists
+        id: branch
+        if: steps.check.outputs.needed == 'true'
+        env:
+          VERSION: ${{ steps.release.outputs.version }}
+        run: |
+          if git ls-remote --exit-code --heads origin "update/panel-$VERSION" >/dev/null; then
+            echo "Branch update/panel-$VERSION already exists; PR is pending or was closed."
+            echo "exists=true" >> "$GITHUB_OUTPUT"
+          else
+            echo "exists=false" >> "$GITHUB_OUTPUT"
+          fi
+
+      - name: Update apps
+        id: update
+        if: steps.check.outputs.needed == 'true' && steps.branch.outputs.exists == 'false'
+        env:
+          VERSION: ${{ steps.release.outputs.version }}
+        run: |
+          changed=$(.github/scripts/update-panel.py "$VERSION" "$RUNNER_TEMP/notes.md")
+          echo "Updated: $changed"
+          {
+            echo "changed<<EOF"
+            echo "$changed"
+            echo "EOF"
+          } >> "$GITHUB_OUTPUT"
+          git diff --stat
+
+      - name: Open pull request
+        if: steps.update.outputs.changed != ''
+        env:
+          GH_TOKEN: ${{ github.token }}
+          VERSION: ${{ steps.release.outputs.version }}
+        run: |
+          branch="update/panel-$VERSION"
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git checkout -b "$branch"
+          git add -A
+          git commit -m "Update Calagopus Panel to $VERSION"
+          git push origin "$branch"
+          gh pr create \
+            --title "Update Calagopus Panel to $VERSION" \
+            --body "Automated update to [calagopus/panel release-$VERSION](https://github.com/calagopus/panel/releases/tag/release-$VERSION).
+
+          Updates the panel image tag and digest, \`version\` and \`releaseNotes\` for: $(echo "${{ steps.update.outputs.changed }}" | tr '\n' ' ')" \
+            --head "$branch"
