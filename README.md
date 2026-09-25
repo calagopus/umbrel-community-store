@@ -2,4 +2,4 @@
 
 # Calagopus Umbrel Community Store
 
-Community store for [UmbrelOS](https://umbrel.com/umbrelos), for installation details visit ![https://calagopus.com/docs/panel/installation/external-methods/umbrelos].
+Community store for [UmbrelOS](https://umbrel.com/umbrelos), for installation details visit [calagopus.com](https://calagopus.com/docs/panel/installation/external-methods/umbrelos).
