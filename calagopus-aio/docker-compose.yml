@@ -36,7 +36,7 @@ services:
       - ${APP_DATA_DIR}/data/wings-tmp:/tmp/calagopus-wings
 
   web:
-    image: ghcr.io/calagopus/panel:1.1.5-aio@sha256:69ce9aa2edd197c19d6252671a0a1d721e246826663940dce27e836fbff7f42b
+    image: ghcr.io/calagopus/panel:1.2.2-aio@sha256:da4fb59be235454639c8839a26407d01e72f06b84ae79c23cb282a8ccb49a680
     restart: on-failure
     stop_grace_period: 1m
     depends_on:
