@@ -7,7 +7,7 @@ services:
       APP_PORT: 8000
 
   web:
-    image: ghcr.io/calagopus/panel:1.2.2-aio@sha256:da4fb59be235454639c8839a26407d01e72f06b84ae79c23cb282a8ccb49a680
+    image: ghcr.io/calagopus/panel:1.2.3-aio@sha256:5babe51881c7ab42a86010786b0a3b3411024917154f41bde277c83b8d0994a1
     restart: on-failure
     stop_grace_period: 1m
     depends_on:

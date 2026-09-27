@@ -2,7 +2,7 @@ manifestVersion: 1
 id: calagopus-heavy-aio
 category: developer
 name: Calagopus Heavy AIO
-version: "1.2.2"
+version: "1.2.3"
 tagline: A modern game server management panel built in Rust. Deploy, monitor,
   and manage Minecraft, Hytale, and other game servers with industry-leading performance.
 icon: https://calagopus.com/logos/icon.svg
@@ -22,22 +22,18 @@ description: >-
   You are viewing: Calagopus Heavy AIO.
 releaseNotes: |-
   Added:
-  - Added support for shared file upload state
-  - Added support for importing avatars from oauth providers
-  - Added the ability to hide addresses in the panel
-  - Added support for disabling activity ip viewing for certain groups
-  - Added new empty table design with a CTA
-  - Added support for mass-statting paths
-  - Added file upload conflict warnings
-  - Added ability to fully disable password logins
-  - Added missing backup deletion/force deletion switch on mass-admin-server-actions
-
-  Fixed:
-  - Fixed some possible performance issues
-  - Fixed breakpoints in virtual windows not working properly
-  - Fixed self-reporting memory usage including non-RSS usage
+  - Added support for searching by UUID in all searchable listings
+  - Added support for mass-selection on more pages
+  - Added support for setting container labels on servers
+  - Added better backup retention information
+  - Added more options for opening file manager entries
+  - Added support for starting servers after installations
+  - Added support for having multiple panel origins
+  - Added IP autocomplete to Node Allocations
+  - Added missing notice to web wings/db-agent config editor saying that some keys cannot be updated
+  - Added more type information on database exploration endpoints and added some datatype-specific inputs
   …
-  Full notes: https://github.com/calagopus/panel/releases/tag/release-1.2.2
+  Full notes: https://github.com/calagopus/panel/releases/tag/release-1.2.3
 developer: Calagopus
 website: https://calagopus.com
 dependencies: []
