@@ -2,7 +2,7 @@ manifestVersion: 1
 id: calagopus-aio
 category: developer
 name: Calagopus AIO
-version: "1.2.3"
+version: "1.2.4"
 tagline: A modern game server management panel built in Rust. Deploy, monitor,
   and manage Minecraft, Hytale, and other game servers with industry-leading performance.
 icon: https://calagopus.com/logos/icon.svg
@@ -22,18 +22,21 @@ description: >-
   You are viewing: Calagopus AIO.
 releaseNotes: |-
   Added:
-  - Added support for searching by UUID in all searchable listings
-  - Added support for mass-selection on more pages
-  - Added support for setting container labels on servers
-  - Added better backup retention information
-  - Added more options for opening file manager entries
-  - Added support for starting servers after installations
-  - Added support for having multiple panel origins
-  - Added IP autocomplete to Node Allocations
-  - Added missing notice to web wings/db-agent config editor saying that some keys cannot be updated
-  - Added more type information on database exploration endpoints and added some datatype-specific inputs
+  - Added select-all checkboxes to more pages where it was missing
+  - Added support for the "Cap" Captcha provider
+  - Added PKCE support to oauth providers
+  - Added the ability to test backup configurations on nodes remotely
+  - Added support for disabling web extension management in the heavy image
+  - Added new chart QOL and designs
+  - Added support for importing oauth providers from .well-known directives
+  - Added the ability to easily set a command prefix in the console
+  - Added frontend file-type validation to db-agent imports
+  - Added warnings of unsaved changes/draft support in more places
+  - Added an option to toggle the file conflict modals
+
+  Fixed:
   …
-  Full notes: https://github.com/calagopus/panel/releases/tag/release-1.2.3
+  Full notes: https://github.com/calagopus/panel/releases/tag/release-1.2.4
 developer: Calagopus
 website: https://calagopus.com
 dependencies: []
