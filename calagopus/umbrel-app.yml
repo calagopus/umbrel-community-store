@@ -2,7 +2,7 @@ manifestVersion: 1
 id: calagopus
 category: developer
 name: Calagopus
-version: "1.2.5"
+version: "1.2.6"
 tagline: A modern game server management panel built in Rust. Deploy, monitor,
   and manage Minecraft, Hytale, and other game servers with industry-leading performance.
 icon: https://calagopus.com/logos/icon.svg
@@ -22,19 +22,18 @@ description: >-
   You are viewing: Calagopus (panel only).
 releaseNotes: |-
   Added:
-  - Added support for streaming unix sockets inside servers over a websocket
-  - Added support for server bandwidth limiting ( @Tomaxikz )
-  - Added language picker and auto-detection in auth screen
-  - Added support for setting a redis key prefix for the panel
-  - Added more customization options to egg configuration matching and functions
-  - Added support for fetching from multiple info urls for oauth mapping purposes
+  - Added trash bin
+  - Added upload progress indication to extensions page
+  - Added indication of what extensions are causing build issues
+  - Added new egg library to simplify egg workflows
+  - Added setting for disabling avatar modification
+  - Added download button to 2fa codes modal
 
   Fixed:
-  - Fixed some reliability issues with pterodactyl-compatible egg export
-  - Fixed unnecessary cargo workspace chaos causing longer backend rebuild times
-  - Fixed some minor bugs around postgres databases outside of db-agent
-  …
-  Full notes: https://github.com/calagopus/panel/releases/tag/release-1.2.5
+  - Fixed mass-transfer-all servers not working properly on the frontend
+  - FIxed admin settings pages being an unorganized mess in some cases
+  - Fixed issues with imports from pterodactyl v2
+  - Fixed further UX issues with file ignore matching
 developer: Calagopus
 website: https://calagopus.com
 dependencies: []
