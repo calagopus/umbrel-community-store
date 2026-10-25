@@ -2,7 +2,7 @@ manifestVersion: 1
 id: calagopus
 category: developer
 name: Calagopus
-version: "1.2.6"
+version: "1.2.7"
 tagline: A modern game server management panel built in Rust. Deploy, monitor,
   and manage Minecraft, Hytale, and other game servers with industry-leading performance.
 icon: https://calagopus.com/logos/icon.svg
@@ -22,18 +22,22 @@ description: >-
   You are viewing: Calagopus (panel only).
 releaseNotes: |-
   Added:
-  - Added trash bin
-  - Added upload progress indication to extensions page
-  - Added indication of what extensions are causing build issues
-  - Added new egg library to simplify egg workflows
-  - Added setting for disabling avatar modification
-  - Added download button to 2fa codes modal
+  - Added support for new self-upgrade flow
+  - Added copy logs button to build logs modal
+  - Added heart status icon to regular database hosts
+  - Added database size overview to regular database hosts
+  - Added allocation breakdown to node/db-agent hosts
+  - Added explicit handling for extension startups
+  - Added ability to resize sidebar in file manager tree mode
+  - Added ability to use advanced search in file manager tree mode
+  - Added extension build failed alert to admin homepage
+  - Added backup locking/unlocking directly to backup context menu
+  - Added ability to choose page sizes in paginations
+  - Added icon picking support to oauth providers and custom sidebar routes
 
   Fixed:
-  - Fixed mass-transfer-all servers not working properly on the frontend
-  - FIxed admin settings pages being an unorganized mess in some cases
-  - Fixed issues with imports from pterodactyl v2
-  - Fixed further UX issues with file ignore matching
+  …
+  Full notes: https://github.com/calagopus/panel/releases/tag/release-1.2.7
 developer: Calagopus
 website: https://calagopus.com
 dependencies: []
