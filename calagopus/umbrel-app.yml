@@ -2,7 +2,7 @@ manifestVersion: 1
 id: calagopus
 category: developer
 name: Calagopus
-version: "1.2.7"
+version: "1.2.8"
 tagline: A modern game server management panel built in Rust. Deploy, monitor,
   and manage Minecraft, Hytale, and other game servers with industry-leading performance.
 icon: https://calagopus.com/logos/icon.svg
@@ -22,22 +22,20 @@ description: >-
   You are viewing: Calagopus (panel only).
 releaseNotes: |-
   Added:
-  - Added support for new self-upgrade flow
-  - Added copy logs button to build logs modal
-  - Added heart status icon to regular database hosts
-  - Added database size overview to regular database hosts
-  - Added allocation breakdown to node/db-agent hosts
-  - Added explicit handling for extension startups
-  - Added ability to resize sidebar in file manager tree mode
-  - Added ability to use advanced search in file manager tree mode
-  - Added extension build failed alert to admin homepage
-  - Added backup locking/unlocking directly to backup context menu
-  - Added ability to choose page sizes in paginations
-  - Added icon picking support to oauth providers and custom sidebar routes
+  - Added new msgpack websocket transmission mode for more efficient binary communication
+  - Added support for customizing console/editor font size via keyboard shortcuts
+  - Added admin controls for mass-retrying failed-deletion backups
+  - Added explicit oauth API linkability option to oauth providers
+  - Added children counts to many admin tables
+  - Added support for weekly cronjobs in schedules
+  - Added ability to hide oauth providers from login
 
   Fixed:
+  - Fixed some bugs in the file manager tree view pane system
+  - FIxed MacOS issues related to xterm copying
+  - Fixed Announcements being able to murder mobile UX
   …
-  Full notes: https://github.com/calagopus/panel/releases/tag/release-1.2.7
+  Full notes: https://github.com/calagopus/panel/releases/tag/release-1.2.8
 developer: Calagopus
 website: https://calagopus.com
 dependencies: []
