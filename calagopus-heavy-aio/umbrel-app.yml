@@ -2,7 +2,7 @@ manifestVersion: 1
 id: calagopus-heavy-aio
 category: developer
 name: Calagopus Heavy AIO
-version: "1.2.10"
+version: "1.2.11"
 tagline: A modern game server management panel built in Rust. Deploy, monitor,
   and manage Minecraft, Hytale, and other game servers with industry-leading performance.
 icon: https://calagopus.com/logos/icon.svg
@@ -22,21 +22,19 @@ description: >-
   You are viewing: Calagopus Heavy AIO.
 releaseNotes: |-
   Added:
-  - Added support for crash history tracking
-  - Added a reverse proxy section on the health page
-  - Added extension APIs for CSP modification
-  - Added import/export support to egg configurations
-  - Added support for dragging on resource history graphs to get custom spans
-  - Added new command to make migrating storage driver to s3 easier
-
-  Fixed:
-  - Fixed restic prunes still running on backup configs with maintenance enabled
-  - Fixed avatar fallback being hardcoded to Calagopus Icon
-  - Fixed webmanifest hardcoding Calagopus references
-  - Fixed wasm load error on mobile file editing with the pierre editor
-  - Fixed page crash bug on certain unfinished translation items
+  - Added clickhouse support to db-agent
+  - Added some additional security hardening in places
+  - Added more configuration options for the PWA in admin settings
+  - Added new theme variant system and an OLED theme
+  - Added support for deploying (not creating) servers via the UI
+  - Added support for reassigning allocations against egg configuration rules
+  - Added optional name property to oauth mappings
+  - Added more actions in admin server mass-selects
+  - Added display for default node timezone instead of a bare "System"
+  - Added support for variable exclusion, added new admin variable rule editor
+  - Added integrated password generator to some fields
   …
-  Full notes: https://github.com/calagopus/panel/releases/tag/release-1.2.10
+  Full notes: https://github.com/calagopus/panel/releases/tag/release-1.2.11
 developer: Calagopus
 website: https://calagopus.com
 dependencies: []
